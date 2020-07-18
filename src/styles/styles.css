@@ -111,6 +111,15 @@ p {
   transform: translate(-50%, -50%);
 }
 
+.No-Discount {
+  position: absolute;
+  right: 0px;
+  bottom: -45px;
+  padding-right: 10px;
+  color: limegreen;
+  font-size: x-large;
+  font-weight: 600;
+}
 .Discount {
   position: absolute;
   bottom: -20px;

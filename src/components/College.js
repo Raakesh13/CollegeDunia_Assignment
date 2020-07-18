@@ -25,7 +25,7 @@ const College = (props) => {
           {props.college.rating_remarks}
         </div>
 
-        {props.college.discount ? (
+        {props.college.discount > 0 ? (
           <div>
             <div className="Original-Fees">
               <strike>
@@ -39,7 +39,7 @@ const College = (props) => {
             <div className="Discount">{props.college.discount}</div>
           </div>
         ) : (
-          <div className="Discount">
+          <div className="No-Discount">
             &#8377;{props.college.original_fees.toLocaleString()}
           </div>
         )}
