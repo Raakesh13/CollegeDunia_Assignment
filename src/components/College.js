@@ -1,12 +1,13 @@
 import React from "react";
 import "../styles/styles.css";
-import Image from "../images/college_02.jpg";
 
 const College = (props) => {
+  const images = require.context("../../public/images", true);
+  const imageURL = images(`./${props.college.image}`);
   return (
     <div className="card">
       <div className="Image">
-        <img src={Image} alt="College" />
+        <img src={imageURL} alt="College" />
         <div className="College-Name">{props.college["college_name"]}</div>
         {props.college.promoted && <div className="Promoted">PROMOTED</div>}
         <div className="Tags">
@@ -24,14 +25,24 @@ const College = (props) => {
           {props.college.rating_remarks}
         </div>
 
-        <div className="Original-Fees">
-          <strike>&#8377;{props.college.original_fees.toLocaleString()}</strike>
-        </div>
-        <div className="Discounted-Fees">
-          &#8377;
-          {props.college.discounted_fees.toLocaleString(undefined)}
-        </div>
-        <div className="Discount">{props.college.discount}</div>
+        {props.college.discount ? (
+          <div>
+            <div className="Original-Fees">
+              <strike>
+                &#8377;{props.college.original_fees.toLocaleString()}
+              </strike>
+            </div>
+            <div className="Discounted-Fees">
+              &#8377;
+              {props.college.discounted_fees.toLocaleString(undefined)}
+            </div>
+            <div className="Discount">{props.college.discount}</div>
+          </div>
+        ) : (
+          <div className="Discount">
+            &#8377;{props.college.original_fees.toLocaleString()}
+          </div>
+        )}
         <div className="Fees-Cycle">{props.college.fees_cycle}</div>
         <div className="Nearest-Places">
           <span className="Nearest-Place-1">
@@ -45,9 +56,7 @@ const College = (props) => {
           {props.college.famous_nearest_places}
         </div>
         <div className="Offertext">{props.college.offertext}</div>
-        <div className="Amenties">
-          {props.college.amenties[0]} + {props.college.amenties[1]}
-        </div>
+        <div className="Amenties">{props.college.amenties.join(" + ")}</div>
       </div>
     </div>
   );
